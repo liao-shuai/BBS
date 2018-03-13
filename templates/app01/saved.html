@@ -1,0 +1,18 @@
+{% extends 'app01/index.html' %}
+{% load comments %}
+{% block page-content %}
+
+
+<div>
+      {% if saved %}
+         <strong>Your profile was saved.</strong>
+      {% endif %}
+
+      {% if not saved %}
+         <strong>Your profile was not saved.</strong>
+      {% endif %}
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)http://v3.bootcss.com/examples/navbar-fixed-top/ -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://v3.bootcss.com/favicon.ico">
+
+    <title>Fixed Top Navbar Example for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/navbar-fixed-top.css" rel="stylesheet">
+    <link href="/static/customize.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">抽屉热播榜</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+
+                  {% ifequal category.id 0 %}
+                        <li class="active"><a href="/index/">全部</a></li>
+                  {% else %}
+                        <li class="#"><a href="/index/">全部</a></li>
+                  {% endifequal %}
+
+                  {% for category in category_list %}
+                    {% ifequal category.id category_id %}
+                        <li class="active"><a href="/category/{{ category.id }}">{{ category.name }}</a></li>
+                    {% else %}
+                        <li class=""><a href="/category/{{ category.id }}">{{ category.name }}</a></li>
+                    {% endifequal %}
+                  {% endfor %}
+
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+                {% if user.is_authenticated%}
+                    {{user.username}}
+
+                {% else %}
+                        登陆
+                {% endif %}
+
+              <span class="caret "></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/register/">register</a></li>
+                <li><a href="/login/">Login</a></li>
+                <li><a href="/logout/">Logout</a></li>
+
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container center-container-hx ">
+    {% block page-content %}
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="contents">
+        {% for bbs in bbs_list %}
+              <a href="/detail/{{ bbs.id }}/">{{ bbs.title }} </a>
+              <br>
+              {{ bbs.summury }}
+              <hr>
+        {% endfor %}
+      </div>
+    {% endblock %}
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/jquery.min.js"></script>
+    <script src="/static/bootstrap.min.js"></script>
+
+    <div id="__nightingale_view_cover" style="width: 100%; height: 100%; transition: -webkit-transform 10s ease-in-out; position: fixed !important; left: 0px !important; bottom: 0px !important; overflow: hidden !important; background: rgb(0, 0, 0) !important; pointer-events: none !important; z-index: 2147483647; opacity: 0;"></div>
+  </body>
+</html>

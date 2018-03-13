@@ -1,0 +1,38 @@
+{% extends 'app01/index.html' %}
+{% load comments %}
+{% block page-content %}
+
+<div class="contents">
+
+    <h3>{{ bbs_obj.title }}</h3>
+    <br>
+    {{ bbs_obj.content }}
+    <hr>
+</div>
+
+
+{% if user.is_authenticated %}
+    <form method="POST" action="/sub_comment/" >
+        {% csrf_token %}
+        <textarea cols="160" rows="4" name=" comment_content" ></textarea>
+        <input type="hidden" name="bbs_id" value="{{ bbs_obj.id }}" />
+            <br>
+        <input type="submit" value="提交评论" id="id_submit" />
+
+    {% else %}
+    <p>Please <a href="/login/">log in</a> to submit a comment!</p>
+    </form>
+{% endif %}
+
+
+<div class="comments">
+    {% get_comment_list for bbs_obj as comment_list %}
+    {% for comment in comment_list %}
+        {{ comment.submit_date }}
+        <br>
+        {{ comment.comment }}
+        <hr>
+    {% endfor %}
+
+</div>
+{% endblock %}

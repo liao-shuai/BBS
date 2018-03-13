@@ -1,0 +1,20 @@
+{% extends 'app01/index.html' %}
+
+{% block page-content %}
+
+<div>
+    <h1>注册页面</h1>
+        <form action="{% url 'register' %}" method="post" accept-charset="utf-8"enctype="multipart/form-data" >
+           {% csrf_token %}
+            username:
+           <input type="text" name="username"id="username" placeholder="请输入用户名" >
+            <br>
+            password:
+           <input type="password"  name="password" id="password" placeholder="请输入6-12位密码" >
+            <br>
+           <input type="submit" class="submit" value="立即注册">
+         </form>
+    <a href="/login/">登陆</a>
+</div>
+
+{% endblock %}

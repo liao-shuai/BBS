@@ -1,0 +1,40 @@
+{% extends 'app01/index.html' %}
+
+{% block page-content %}
+
+<div>
+    <!-- tinyMCE -->
+
+    <script language="javascript" type="text/javascript" src="/static/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script language="javascript" type="text/javascript">
+tinymce.init({
+    selector: "textarea",
+    theme: "modern",
+    plugins: [
+        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+        "searchreplace wordcount visualblocks visualchars code fullscreen",
+        "insertdatetime media nonbreaking save table contextmenu directionality",
+        "emoticons template paste textcolor colorpicker textpattern"
+    ],
+    toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+    toolbar2: "print preview media | forecolor backcolor emoticons",
+    image_advtab: true,
+    templates: [
+        {title: 'Test template 1', content: 'Test 1'},
+        {title: 'Test template 2', content: 'Test 2'}
+    ]
+ });
+    </script>
+    <!-- /tinyMCE -->
+
+    <!-- Place this in the body of the page content -->
+
+    <form action="/bbs_sub/" method="post">
+        {% csrf_token %}
+        <textarea name="content"></textarea>
+        <input type="submit" value="保存">
+    </form>
+
+
+</div>
+{% endblock %}
